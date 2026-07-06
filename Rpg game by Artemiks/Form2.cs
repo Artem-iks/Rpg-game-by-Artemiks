@@ -6,18 +6,43 @@ namespace Rpg_game_by_Artemiks
 {
     public partial class Form2 : Form
     {
+        public int Coins = 0;
+
+        public void SaveCoins()
+        {
+            System.IO.File.WriteAllText("coins.txt", Coins.ToString());
+        }
+
+        public void LoadCoins()
+        {
+            if (System.IO.File.Exists("coins.txt"))
+            {
+                if (int.TryParse(System.IO.File.ReadAllText("coins.txt"), out int savedCoins))
+                {
+                    Coins = savedCoins;
+                }
+            }
+            else
+            {
+                Coins = 0;
+            }
+        }
+
         private string playerName;
 
-        public Form2()
-        {
-            InitializeComponent();
-        }
+
 
         public Form2(string name)
         {
             InitializeComponent();
+            label2.Text = name;
             playerName = name;
+            LoadCoins();
+            label3.Text = Coins.ToString();
         }
+            public int clickCount = 0;
+
+        
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -90,5 +115,31 @@ namespace Rpg_game_by_Artemiks
         {
             
         }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (clickCount >= 10)
+            {
+                MessageBox.Show("Помилка! Треба зіграти бій!", "Помилка");
+                return;
+            }
+
+            Coins += 1;
+            label3.Text = Coins.ToString();
+            SaveCoins();
+
+            clickCount++;
+            if (clickCount >= 10)
+            {
+                button4.Enabled = false;
+                button4.Text = "Немає багу, єноте!! іди в бій";
+            }
+        }
+
     }
 }

@@ -10,10 +10,13 @@ namespace Rpg_game_by_Artemiks
         {
             InitializeComponent();
 
+
             progressBar1.Value = 100;
             progressBar2.Value = 100;
             progressBar3.Value = 100;
         }
+        private bool isVictory = false;
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -28,7 +31,17 @@ namespace Rpg_game_by_Artemiks
                 if (progressBar3.Value <= 0)
                 {
                     MessageBox.Show("Ви перемогли!");
+                    isVictory = true;
+
+
+                    Form2 mainMenu = (Form2)Application.OpenForms["Form2"];
+                    if (mainMenu != null)
+                    {
+                        mainMenu.clickCount = 0;
+                    }
                     this.Close();
+
+                   
                 }
                 else
                 {
@@ -120,8 +133,36 @@ namespace Rpg_game_by_Artemiks
             if (progressBar1.Value <= 0)
             {
                 MessageBox.Show("Ви програли!");
+                isVictory = false;
+                Form2 mainMenu = (Form2)Application.OpenForms["Form2"];
+                if (mainMenu != null)
+                {
+                    mainMenu.clickCount = 0;
+                    mainMenu.LoadCoins();
+
+                    if (mainMenu.Controls["button4"] is Button btnClick)
+                    {
+                        btnClick.Enabled = true;
+                    }
+                    if (mainMenu.Controls["label3"] is Label lblCoins)
+                    {
+                        lblCoins.Text = mainMenu.Coins.ToString();
+                    }
+                    mainMenu.Show();
+                }
+                
+
                 this.Close();
+               
+
+
+
             }
+        }
+
+        private void BattleForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -6,11 +6,26 @@ namespace Rpg_game_by_Artemiks
     public partial class ShopForm : Form
     {
         private Random rnd = new Random();
-        private int balance = 1000;
+        private int balance = 0;
 
         public ShopForm()
         {
             InitializeComponent();
+            if (System.IO.File.Exists("coins.txt"))
+            {
+                int savedCoins;
+                if (int.TryParse(System.IO.File.ReadAllText("coins.txt"), out savedCoins))
+                {
+                    balance = savedCoins;
+                }
+            }
+            else
+            {
+                balance = 0;
+            }
+
+            label3.Text = "Баланс: " + balance + " $";
+
 
             label3.Text = "Баланс: " + balance + " $";
 
@@ -36,6 +51,8 @@ namespace Rpg_game_by_Artemiks
 
         private void button1_Click(object sender, EventArgs e)
         {
+            System.IO.File.WriteAllText("coins.txt", label3.ToString());
+
             if (listBox1.SelectedItem == null)
             {
                 MessageBox.Show("Виберіть товар зі списку!");

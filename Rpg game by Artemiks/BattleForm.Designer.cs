@@ -103,7 +103,6 @@
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(199, 14);
             this.progressBar1.TabIndex = 6;
-            
             // 
             // progressBar2
             // 
@@ -111,7 +110,6 @@
             this.progressBar2.Name = "progressBar2";
             this.progressBar2.Size = new System.Drawing.Size(199, 14);
             this.progressBar2.TabIndex = 7;
-           
             // 
             // progressBar3
             // 
@@ -119,7 +117,6 @@
             this.progressBar3.Name = "progressBar3";
             this.progressBar3.Size = new System.Drawing.Size(199, 14);
             this.progressBar3.TabIndex = 8;
-           
             // 
             // textBox1
             // 
@@ -194,9 +191,10 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox2);
             this.Name = "BattleForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BattleForm";
             this.TopMost = true;
-          
+            this.Load += new System.EventHandler(this.BattleForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
